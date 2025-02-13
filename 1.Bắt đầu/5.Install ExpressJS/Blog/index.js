@@ -4,7 +4,7 @@ const port = 3000
 
 //router
 app.get('/trangchu', (req, res) => {
-    res.send('Trang chủ')
+    res.send('Trang c')
 })
 
 //127.0.0.1 - localhost 
