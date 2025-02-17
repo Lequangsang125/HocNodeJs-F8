@@ -22,8 +22,10 @@
             <option value="delete">Xóa</option>
             <option value="2">Khôi phục</option>
         </select>
-        <button class="btn check-all-submit-btn btn-success btn-sm " disabled="disabled">Thực hiện</button>
+        <button class="btn check-all-submit-btn btn-success btn-sm disabled">Thực hiện</button>
     </div>
+
+    
 
     <!-- Bảng danh sách khóa học -->
     <div class="table-responsive">
@@ -32,9 +34,9 @@
                 <tr>
                     <th>#</th>
                     <th>ID</th>
-                    <th>Tên khóa học</th>
-                    <th>Trình độ</th>
-                    <th>Ngày tạo</th>
+                    <th>Tên khóa học {{{sortable 'name' _sort}}}</th>
+                    <th>Trình độ {{{sortable 'level' _sort}}}</th>
+                    <th>Ngày tạo {{{sortable 'createdAt' _sort}}}</th>
                     <th colspan="2">Hành động</th>
                 </tr>
             </thead>
@@ -138,6 +140,14 @@
             checkboxAll.prop('checked', isCheckedAll)
             renderCheckAllSubmitBtn()
         });
+        //check all submit button
+
+        containerForm.on('submit', function (e) {
+            var isSubmitable = !$(this).hasClass('disabled')
+            if (!isSubmitable) {
+                e.preventDefault()
+            }
+        })
 
         //Re-render check all submit
         function renderCheckAllSubmitBtn() {

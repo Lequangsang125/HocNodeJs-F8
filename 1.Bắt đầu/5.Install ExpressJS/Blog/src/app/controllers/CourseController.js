@@ -39,11 +39,18 @@ class CourseController {
         // Tạo ảnh thumbnail từ YouTube video ID
         req.body.image = `https://img.youtube.com/vi/${req.body.videoId}/sddefault.jpg`;
 
+        Course.findOne({}
+            .sort({ _id: 'desc' })
+            .then(latestCourse => {
+                return res.json(latestCourse)
+                req.body._id = 1
+                const course = new Course(req.body);
+                course.save()
+                    .then(() => res.redirect('/me/stored/courses'))
+                    .catch(next);
+            })
+        )
         // Tạo đối tượng Course và lưu vào DB
-        const course = new Course(req.body);
-        course.save()
-            .then(() => res.redirect('/me/stored/courses'))
-            .catch(next);
     }
 
     /**
